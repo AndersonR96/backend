@@ -11,7 +11,7 @@ const conection = new Sequelize(
     dialect: process.env.DB_DIALECT,
   }
 );
-if (process.env.ENTORNO == "production") {
+if (process.env.ENTORNO == "Production") {
   conection.options.dialectOptions = SSL;
   conection.config.dialectOptions = SSL;
   conection.connectionManager.config.dialectOptions = SSL;
