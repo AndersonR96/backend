@@ -1,7 +1,7 @@
-const { User } = require('../models/index')
+import Customer from "../models/index.js"
 
-const getUsers = async(req, res) => {
-     await User.findAll()
+const getCustomer = async(req, res) => {
+     await Customer.findAll()
     .then(response => {
         if (response.length === 0) {
             return res.status(404).json({
@@ -19,8 +19,8 @@ const getUsers = async(req, res) => {
     })
 }
 
-const getUserById = async (req, res) => {
-    await User.findByPk(req.params.id, {
+const getCustomerById = async (req, res) => {
+    await Customer.findByPk(req.params.id, {
         attributes:[
             'name',
             'last_name',
@@ -43,8 +43,8 @@ const getUserById = async (req, res) => {
     })
 }
 
-const createUser = async (req, res) => {
-    const response = await User.create(req.body)
+const createCustomer = async (req, res) => {
+    const response = await Customer.create(req.body)
     .catch(err => {
         res.status(400).json({
             success: false,
@@ -54,8 +54,8 @@ const createUser = async (req, res) => {
     res.status(200).json(response)
 }
 
-module.exports = {
-    getUsers,
-    getUserById,
-    createUser,
+export {
+    getCustomer,
+    getCustomerById,
+    createCustomer,
 }

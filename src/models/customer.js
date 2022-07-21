@@ -1,7 +1,7 @@
 import  DataTypes  from 'sequelize';
 import connection from '../../database/connection.js';
 
-const Provider = connection.define('Provider', {
+const Customer = connection.define('Customer', {
     dni:{
         type: DataTypes.STRING,
         require: true,
@@ -50,4 +50,4 @@ const Provider = connection.define('Provider', {
     timestamps: true,
 })
 
-export default Provider
+export default Customer;

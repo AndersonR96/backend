@@ -1,10 +1,10 @@
-const conection = require('../../database/conection')
-const User = require('./user')
-const Provider = require('./provider')
+import connection from '../../database/connection.js'
+import Customer from './customer.js'
+import Provider from './provider.js'
 
-module.exports = {
-    User,
+export default {
+    Customer,
     Provider
 }
 
-conection.sync({alter: true})
+connection.sync({alter: true})

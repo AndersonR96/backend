@@ -1,4 +1,4 @@
-const { Provider } = require('../models/index')
+import Provider from "../models/provider.js"
 
 const getProvider = async(req, res) => {
      await Provider.findAll()
@@ -55,7 +55,7 @@ const createProvider = async (req, res) => {
     res.status(200).json(response)
 }
 
-module.exports = {
+export {
     getProvider,
     getProviderById,
     createProvider,

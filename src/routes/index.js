@@ -1,15 +1,16 @@
-const { Router } = require('express')
-const router = Router()
-require('dotenv').config()
-const conection = require('../../database/conection')
-// const models = require('../models/index')
-const { getUsers, getUserById, createUser } = require('../controllers/users')
-const { getProvider, getProviderById, createProvider } = require('../controllers/provider')
+import { Router } from 'express'
+import connection from '../../database/connection.js'
+import { getCustomer, getCustomerById, createCustomer } from '../controllers/customer.js'
+import {getProvider, getProviderById, createProvider} from '../controllers/provider.js'
 
+import dotenv from 'dotenv'
+dotenv.config()
+
+const router = Router()
 router.get('/', async function(req, res) {
     let status = '';
     try{
-        conection.authenticate();
+        connection.authenticate();
         status = "Database Conected"
     } catch(err){
         status = "Database Desconected"
@@ -25,9 +26,9 @@ router.get('/', async function(req, res) {
 })
 
 //RUTAS MODELO USER
-router.get('/users', getUsers)
-router.get('/users/:id', getUserById)
-router.post('/users', createUser)
+router.get('/users', getCustomer)
+router.get('/users/:id', getCustomerById)
+router.post('/users', createCustomer)
 
 //RUTAS MODELO PROVIDER (PROVEEDOR)
 router.get('/provider', getProvider)
@@ -36,4 +37,4 @@ router.post('/provider', createProvider)
 
 
 
-module.exports = router
+export default router

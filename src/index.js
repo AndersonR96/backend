@@ -1,11 +1,13 @@
-const express = require('express')
+import express, { json, urlencoded } from 'express'
+import router from './routes/index.js'
+
 const app = express()
 
 //Middlewares
-app.use(express.json())
-app.use(express.urlencoded({extended: false}))
+app.use(json())
+app.use(urlencoded({extended: false}))
 
-app.use(require('./routes/index'))
+app.use(router)
 
 const PORT = process.env.PORT || 4000
 
