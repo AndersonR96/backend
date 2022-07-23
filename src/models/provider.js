@@ -2,6 +2,10 @@ import  DataTypes  from 'sequelize';
 import connection from '../../database/connection.js';
 
 const Provider = connection.define('Provider', {
+    provider_type:{
+        type: DataTypes.STRING,
+        require: true,
+    },
     dni:{
         type: DataTypes.STRING,
         require: true,

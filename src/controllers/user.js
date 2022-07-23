@@ -1,12 +1,12 @@
-import Provider from "../models/index.js"
+import User from "../models/index.js"
 
-const getProvider = async(req, res) => {
-     await Provider.findAll()
+const getUser = async(req, res) => {
+     await User.findAll()
     .then(response => {
         if (response.length === 0) {
             return res.status(404).json({
                 success: false,
-                message: 'No hay proveedor'
+                message: 'No hay usuarios'
             })
         } else {
             return res.status(200).json(response)
@@ -19,12 +19,11 @@ const getProvider = async(req, res) => {
     })
 }
 
-const getProviderById = async (req, res) => {
-    await Provider.findByPk(req.params.id, {
+const getUserById = async (req, res) => {
+    await User.findByPk(req.params.id, {
         attributes:[
-            'businnes_name',
-            'name',
-            'last_name',
+            'username',
+            'name'
         ]
     })
     .then(response => {
@@ -33,7 +32,7 @@ const getProviderById = async (req, res) => {
         } else {
             return res.status(404).json({
                 success: false,
-                message: 'No se encontro el proveedor'
+                message: 'No se encontro ningun usuario'
             })
         }
     }).catch( err => {
@@ -44,8 +43,8 @@ const getProviderById = async (req, res) => {
     })
 }
 
-const createProvider = async (req, res) => {
-    const response = await Provider.create(req.body)
+const createUser = async (req, res) => {
+    const response = await User.create(req.body)
     .catch(err => {
         res.status(400).json({
             success: false,
@@ -56,7 +55,7 @@ const createProvider = async (req, res) => {
 }
 
 export {
-    getProvider,
-    getProviderById,
-    createProvider,
+    getUser,
+    getUserById,
+    createUser,
 }

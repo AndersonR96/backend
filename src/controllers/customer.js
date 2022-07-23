@@ -6,7 +6,7 @@ const getCustomer = async(req, res) => {
         if (response.length === 0) {
             return res.status(404).json({
                 success: false,
-                message: 'No hay usuarios'
+                message: 'No hay clietes'
             })
         } else {
             return res.status(200).json(response)
@@ -32,7 +32,7 @@ const getCustomerById = async (req, res) => {
         } else {
             return res.status(404).json({
                 success: false,
-                message: 'No se encontro el usuario'
+                message: 'No se encontro el cliente'
             })
         }
     }).catch( err => {
