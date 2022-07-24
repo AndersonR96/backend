@@ -1,7 +1,7 @@
-import Customer from "../models/index.js"
+import Models from "../models/index.js"
 
 const getCustomer = async(req, res) => {
-     await Customer.findAll()
+     await Models.Customer.findAll()
     .then(response => {
         if (response.length === 0) {
             return res.status(404).json({
@@ -20,7 +20,7 @@ const getCustomer = async(req, res) => {
 }
 
 const getCustomerById = async (req, res) => {
-    await Customer.findByPk(req.params.id, {
+    await Models.Customer.findByPk(req.params.id, {
         attributes:[
             'name',
             'last_name',
@@ -44,7 +44,7 @@ const getCustomerById = async (req, res) => {
 }
 
 const createCustomer = async (req, res) => {
-    const response = await Customer.create(req.body)
+    const response = await Models.Customer.create(req.body)
     .catch(err => {
         res.status(400).json({
             success: false,

@@ -1,7 +1,8 @@
-import Provider from "../models/index.js"
+// import Provider from "../models/index.js"
+import Models from "../models/index.js"
 
 const getProvider = async(req, res) => {
-     await Provider.findAll()
+     await Models.Provider.findAll()
     .then(response => {
         if (response.length === 0) {
             return res.status(404).json({
@@ -20,7 +21,7 @@ const getProvider = async(req, res) => {
 }
 
 const getProviderById = async (req, res) => {
-    await Provider.findByPk(req.params.id, {
+    await Models.Provider.findByPk(req.params.id, {
         attributes:[
             'businnes_name',
             'name',
@@ -45,7 +46,7 @@ const getProviderById = async (req, res) => {
 }
 
 const createProvider = async (req, res) => {
-    const response = await Provider.create(req.body)
+    const response = await Models.Provider.create(req.body)
     .catch(err => {
         res.status(400).json({
             success: false,
