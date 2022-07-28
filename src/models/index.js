@@ -25,7 +25,7 @@ Models.PurchaseProducts = connection.define('PurchaseProducts', {
     ProductId: {
         type: DataTypes.INTEGER,
         references: {
-          model: User,
+          model: Product,
           key: 'id'
         }
       }
@@ -37,7 +37,7 @@ Purchase.belongsToMany(Product, { through: Models.PurchaseProducts });
 Product.belongsToMany(Purchase, { through: Models.PurchaseProducts });
 
 // RELACION ONE TO MANY CUSTOMER - PURCHASE
-Customer.hasOne(Purchase)
+Customer.hasMany(Purchase)
 Purchase.belongsTo(Customer)
 
 
