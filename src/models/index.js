@@ -2,19 +2,45 @@ import connection from '../../database/connection.js'
 import Customer from './customer.js'
 import Provider from './provider.js'
 import User from './user.js'
+import Product from './product.js'
+import Purchase from './purchase.js'
+import DataTypes  from 'sequelize';
 
 const Models = {
     Customer,
     Provider,
-    User
+    User,
+    Product,
+    Purchase,
 }
 
-export default Models
+Models.PurchaseProducts = connection.define('PurchaseProducts', {
+    PurchaseId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: Product, 
+          key: 'id'
+        }
+      },
+    ProductId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: User,
+          key: 'id'
+        }
+      }
+})
 
-// export default {
-//     Customer,
-//     Provider,
-//     User
-// }
+
+// RELACION MANY TO MANY CUSTOMER - PURCHASE
+Purchase.belongsToMany(Product, { through: Models.PurchaseProducts });
+Product.belongsToMany(Purchase, { through: Models.PurchaseProducts });
+
+// RELACION ONE TO MANY CUSTOMER - PURCHASE
+Customer.hasOne(Purchase)
+Purchase.belongsTo(Customer)
+
+
+export default Models
 
 connection.sync({alter: true})
