@@ -1,8 +1,6 @@
 import { Router } from 'express'
 import connection from '../../database/connection.js'
-import { getCustomer, getCustomerById, createCustomer } from '../controllers/customer.js'
-import { getProvider, getProviderById, createProvider } from '../controllers/provider.js'
-import { getUser, getUserById, createUser, updateUser, deleteUser } from '../controllers/user.js'
+import { Controllers } from '../controllers/index.js'
 import dotenv from 'dotenv'
 
 dotenv.config()
@@ -28,22 +26,28 @@ router.get('/', async function(req, res) {
 })
 
 //RUTAS MODELO CUSTOMER
-router.get('/customer', getCustomer)
-router.get('/customer/:id', getCustomerById)
-router.post('/customer', createCustomer)
+router.get('/customer', Controllers.customerControllers.getCustomer)
+router.get('/customer/:id', Controllers.customerControllers.getCustomerById)
+router.post('/customer', Controllers.customerControllers.createCustomer)
 
 //RUTAS MODELO PROVIDER (PROVEEDOR)
-router.get('/provider', getProvider)
-router.get('/provider/:id', getProviderById)
-router.post('/provider', createProvider)
+router.get('/provider', Controllers.providerControllers.getProvider)
+router.get('/provider/:id', Controllers.providerControllers.getProviderById)
+router.post('/provider', Controllers.providerControllers.createProvider)
 
 //RUTAS MODELO USER
-router.get('/user', getUser)
-router.get('/user/:id', getUserById)
-router.post('/user', createUser)
-router.put('/user/:id', updateUser)
-router.delete('/user/:id', deleteUser)
+router.get('/user', Controllers.userControllers.getUser)
+router.get('/user/:id', Controllers.userControllers.getUserById)
+router.post('/user', Controllers.userControllers.createUser)
+router.put('/user/:id', Controllers.userControllers.updateUser)
+router.delete('/user/:id', Controllers.userControllers.deleteUser)
 
+//RUTAS MODELO COSTO/GASTO
+router.get('/cost', Controllers.costControllers.getCost)
+router.get('/cost/:id', Controllers.costControllers.getCostById)
+router.get('/cost', Controllers.costControllers.createCost)
+router.get('/cost', Controllers.costControllers.updateCost)
+router.get('/cost', Controllers.costControllers.deleteCost)
 
 
 export default router

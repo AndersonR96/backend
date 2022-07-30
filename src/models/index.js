@@ -1,10 +1,12 @@
+import DataTypes  from 'sequelize';
+
 import connection from '../../database/connection.js'
 import Customer from './customer.js'
 import Provider from './provider.js'
 import User from './user.js'
 import Product from './product.js'
 import Purchase from './purchase.js'
-import DataTypes  from 'sequelize';
+import Cost from './cost.js'
 
 const Models = {
     Customer,
@@ -12,13 +14,14 @@ const Models = {
     User,
     Product,
     Purchase,
+    Cost,
 }
 
 Models.PurchaseProducts = connection.define('PurchaseProducts', {
     PurchaseId: {
         type: DataTypes.INTEGER,
         references: {
-          model: Product, 
+          model: Product,
           key: 'id'
         }
       },
