@@ -6,9 +6,6 @@ const Purchase = connection.define('Purchase', {
         type: DataTypes.STRING,
         require: true,
     },
-    // CustomerId: {
-    //     type: DataTypes.INTEGER,
-    // }
 },{
     timestamps: true,
 })

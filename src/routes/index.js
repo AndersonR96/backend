@@ -49,5 +49,13 @@ router.get('/cost', Controllers.costControllers.createCost)
 router.get('/cost', Controllers.costControllers.updateCost)
 router.get('/cost', Controllers.costControllers.deleteCost)
 
+//RUTAS MODELO SERVICIO
+router.get('/productService', Controllers.productServiceControllers.getProductService)
+router.get('/productService/:id', Controllers.productServiceControllers.getProductServiceById)
+router.get('/productService', Controllers.productServiceControllers.createProductService)
+router.get('/productService', Controllers.productServiceControllers.updateProductService)
+router.get('/productService', Controllers.productServiceControllers.deleteProductService)
+
+
 
 export default router
