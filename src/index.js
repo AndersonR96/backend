@@ -1,14 +1,22 @@
-const express = require('express')
+import express, { json, urlencoded } from 'express'
+import router from './routes/index.js'
+
 const app = express()
 
 //Middlewares
-app.use(express.json())
-app.use(express.urlencoded({extended: false}))
+app.use(json())
+app.use(urlencoded({extended: false}))
 
-app.use(require('./routes/index'))
+app.use('/api', router)
+app.get('/routes', async function(req, res) {
+  return res.json(router.stack.map(element => {return element.route}))  
+})
+app.get('/models', async function(req, res) {
+  return res.send('Models view')  
+})
 
 const PORT = process.env.PORT || 4000
 
 app.listen(PORT, function() {
-    console.log('Backendo corriendo en el puerto: ', PORT)
+    console.log('Backend running at port: ', PORT)
 })

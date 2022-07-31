@@ -1,12 +1,13 @@
-const { User } = require('../models/index')
+import Models from "../models/index.js"
+const customerControllers = {}
 
-const getUsers = async(req, res) => {
-     await User.findAll()
+customerControllers.getCustomer = async(req, res) => {
+     await Models.Customer.findAll()
     .then(response => {
         if (response.length === 0) {
             return res.status(404).json({
                 success: false,
-                message: 'No hay usuarios'
+                message: 'No hay clietes'
             })
         } else {
             return res.status(200).json(response)
@@ -19,8 +20,8 @@ const getUsers = async(req, res) => {
     })
 }
 
-const getUserById = async (req, res) => {
-    await User.findByPk(req.params.id, {
+customerControllers.getCustomerById = async (req, res) => {
+    await Models.Customer.findByPk(req.params.id, {
         attributes:[
             'name',
             'last_name',
@@ -32,7 +33,7 @@ const getUserById = async (req, res) => {
         } else {
             return res.status(404).json({
                 success: false,
-                message: 'No se encontro el usuario'
+                message: 'No se encontro el cliente'
             })
         }
     }).catch( err => {
@@ -43,8 +44,8 @@ const getUserById = async (req, res) => {
     })
 }
 
-const createUser = async (req, res) => {
-    const response = await User.create(req.body)
+customerControllers.createCustomer = async (req, res) => {
+    const response = await Models.Customer.create(req.body)
     .catch(err => {
         res.status(400).json({
             success: false,
@@ -54,8 +55,4 @@ const createUser = async (req, res) => {
     res.status(200).json(response)
 }
 
-module.exports = {
-    getUsers,
-    getUserById,
-    createUser,
-}
+export default customerControllers

@@ -1,33 +1,33 @@
-import DataTypes  from 'sequelize';
+import  DataTypes  from 'sequelize';
 import connection from '../../database/connection.js';
 
-const User = connection.define('User', {
+const Cost = connection.define('Cost', {
     name:{
         type: DataTypes.STRING,
         require: true,
     },
-    last_name:{
+    description:{
         type: DataTypes.STRING,
         require: true,
     },
-    email:{
+    prize:{
+        type: DataTypes.STRING,
+        require: true,
+    },
+    IVA:{
+        type: DataTypes.STRING,
+        require: true,
+    },
+    taxes_1:{
+        type: DataTypes.STRING,
+        require: true,
+    },
+    taxes_2:{
         type: DataTypes.STRING,
         defaultValue: '',
-    },
-    username:{
-        type: DataTypes.STRING,
-        defaultValue: '',
-    },
-    password:{
-        type: DataTypes.STRING,
-        defaultValue: '',
-    },
-    userType:{
-        type: DataTypes.STRING,
-        defaultValue: '',
-    },
+    }
 },{
     timestamps: true,
 })
 
-export default User
+export default Cost;

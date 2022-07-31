@@ -1,34 +1,53 @@
-const { Router } = require('express')
+import { Router } from 'express'
+import connection from '../../database/connection.js'
+import { Controllers } from '../controllers/index.js'
+import dotenv from 'dotenv'
+
+dotenv.config()
 const router = Router()
-require('dotenv').config()
-const conection = require('../../database/conection')
-// const models = require('../models/index')
-const { getUsers, getUserById, createUser } = require('../controllers/users')
 
 router.get('/', async function(req, res) {
     let status = '';
     try{
-        conection.authenticate();
-        status = "Database Conected"
+        connection.authenticate();
+        status = "Database Connected"
     } catch(err){
-        status = "Database Desconected"
+        status = "Database Disconnected"
         console.log(err)
     }
     
     res.json({
-        APP: process.env.APP, 
-        ENTORNO: process.env.ENTORNO, 
+        APP: process.env.APP,
+        ENTORNO: process.env.ENTORNO,
         PUERTO: process.env.PORT ? process.env.PORT : 4000,
-        DATABASE: status
+        DATABASE: status,
+        RUTAS: 'as'
     })
 })
 
+//RUTAS MODELO CUSTOMER
+router.get('/customer', Controllers.customerControllers.getCustomer)
+router.get('/customer/:id', Controllers.customerControllers.getCustomerById)
+router.post('/customer', Controllers.customerControllers.createCustomer)
+
+//RUTAS MODELO PROVIDER (PROVEEDOR)
+router.get('/provider', Controllers.providerControllers.getProvider)
+router.get('/provider/:id', Controllers.providerControllers.getProviderById)
+router.post('/provider', Controllers.providerControllers.createProvider)
+
 //RUTAS MODELO USER
-router.get('/users', getUsers)
-router.get('/users/:id', getUserById)
-router.post('/users', createUser)
+router.get('/user', Controllers.userControllers.getUser)
+router.get('/user/:id', Controllers.userControllers.getUserById)
+router.post('/user', Controllers.userControllers.createUser)
+router.put('/user/:id', Controllers.userControllers.updateUser)
+router.delete('/user/:id', Controllers.userControllers.deleteUser)
+
+//RUTAS MODELO COSTO/GASTO
+router.get('/cost', Controllers.costControllers.getCost)
+router.get('/cost/:id', Controllers.costControllers.getCostById)
+router.get('/cost', Controllers.costControllers.createCost)
+router.get('/cost', Controllers.costControllers.updateCost)
+router.get('/cost', Controllers.costControllers.deleteCost)
 
 
-
-
-module.exports = router
+export default router
