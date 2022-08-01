@@ -1,7 +1,7 @@
 import Models from "../models/index.js"
-const customerControllers = {}
+const Customer = {}
 
-customerControllers.getCustomer = async(req, res) => {
+Customer.getCustomer = async(req, res) => {
      await Models.Customer.findAll()
     .then(response => {
         if (response.length === 0) {
@@ -20,7 +20,7 @@ customerControllers.getCustomer = async(req, res) => {
     })
 }
 
-customerControllers.getCustomerById = async (req, res) => {
+Customer.getCustomerById = async (req, res) => {
     await Models.Customer.findByPk(req.params.id, {
         attributes:[
             'name',
@@ -44,7 +44,7 @@ customerControllers.getCustomerById = async (req, res) => {
     })
 }
 
-customerControllers.createCustomer = async (req, res) => {
+Customer.createCustomer = async (req, res) => {
     const response = await Models.Customer.create(req.body)
     .catch(err => {
         res.status(400).json({
@@ -55,4 +55,4 @@ customerControllers.createCustomer = async (req, res) => {
     res.status(200).json(response)
 }
 
-export default customerControllers
+export default Customer

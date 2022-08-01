@@ -26,28 +26,28 @@ router.get('/', async function(req, res) {
 })
 
 //RUTAS MODELO CUSTOMER
-router.get('/customer', Controllers.customerControllers.getCustomer)
-router.get('/customer/:id', Controllers.customerControllers.getCustomerById)
-router.post('/customer', Controllers.customerControllers.createCustomer)
+router.get('/customer', Controllers.Customer.getCustomer)
+router.get('/customer/:id', Controllers.Customer.getCustomerById)
+router.post('/customer', Controllers.Customer.createCustomer)
 
 //RUTAS MODELO PROVIDER (PROVEEDOR)
-router.get('/provider', Controllers.providerControllers.getProvider)
-router.get('/provider/:id', Controllers.providerControllers.getProviderById)
-router.post('/provider', Controllers.providerControllers.createProvider)
+router.get('/provider', Controllers.Provider.getProvider)
+router.get('/provider/:id', Controllers.Provider.getProviderById)
+router.post('/provider', Controllers.Provider.createProvider)
 
 //RUTAS MODELO USER
-router.get('/user', Controllers.userControllers.getUser)
-router.get('/user/:id', Controllers.userControllers.getUserById)
-router.post('/user', Controllers.userControllers.createUser)
-router.put('/user/:id', Controllers.userControllers.updateUser)
-router.delete('/user/:id', Controllers.userControllers.deleteUser)
+router.get('/user', Controllers.User.getUser)
+router.get('/user/:id', Controllers.User.getUserById)
+router.post('/user', Controllers.User.createUser)
+router.put('/user/:id', Controllers.User.updateUser)
+router.delete('/user/:id', Controllers.User.deleteUser)
 
 //RUTAS MODELO COSTO/GASTO
-router.get('/cost', Controllers.costControllers.getCost)
-router.get('/cost/:id', Controllers.costControllers.getCostById)
-router.get('/cost', Controllers.costControllers.createCost)
-router.get('/cost', Controllers.costControllers.updateCost)
-router.get('/cost', Controllers.costControllers.deleteCost)
+router.get('/cost', Controllers.Cost.getCost)
+router.get('/cost/:id', Controllers.Cost.getCostById)
+router.post('/cost', Controllers.Cost.createCost)
+router.put('/cost', Controllers.Cost.updateCost)
+router.delete('/cost', Controllers.Cost.deleteCost)
 
 
 export default router
