@@ -1,14 +1,14 @@
 // import User from "../models/index.js"
 import Models from "../models/index.js"
-const userControllers = {}
+const costControllers = {}
 
-userControllers.getUser = async(req, res) => {
-    await Models.User.findAll()
+costControllers.getCost = async(req, res) => {
+    await Models.Cost.findAll()
     .then(response => {
         if (response.length === 0) {
             return res.status(404).json({
                 success: false,
-                message: 'No hay usuarios'
+                message: 'No existe gasto'
             })
         } else {
             return res.status(200).json(response)
@@ -21,11 +21,10 @@ userControllers.getUser = async(req, res) => {
     })
 }
 
-userControllers.getUserById = async (req, res) => {
-    await Models.User.findByPk(req.params.id, {
+costControllers.getCostById = async (req, res) => {
+    await Models.Cost.findByPk(req.params.id, {
         attributes:[
-            'username',
-            'name'
+            'name',
         ]
     })
     .then(response => {
@@ -34,7 +33,7 @@ userControllers.getUserById = async (req, res) => {
         } else {
             return res.status(404).json({
                 success: false,
-                message: 'No se encontro ningun usuario'
+                message: 'No se encontro ningun gasto'
             })
         }
     }).catch( err => {
@@ -45,8 +44,8 @@ userControllers.getUserById = async (req, res) => {
     })
 }
 
-userControllers.createUser = async (req, res) => {
-    const response = await Models.User.create(req.body)
+costControllers.createCost = async (req, res) => {
+    const response = await Models.Cost.create(req.body)
     .catch(err => {
         res.status(400).json({
             success: false,
@@ -56,8 +55,8 @@ userControllers.createUser = async (req, res) => {
     res.status(200).json(response)
 }
 
-userControllers.updateUser = async (req, res) => {
-    const response = await Models.User.update(req.body, {
+costControllers.updateCost = async (req, res) => {
+    const response = await Models.Cost.update(req.body, {
         where: {
             id: req.params.id
         }
@@ -72,18 +71,18 @@ userControllers.updateUser = async (req, res) => {
     if (response != 0) {
         return res.status(200).json({
             success: true,
-            message: 'Updated user'
+            message: ' Costo/gasto actualizado'
         })
     } else {
         return res.status(404).json({
             success: true,
-            message: 'User no updated'
+            message: 'Esto costo/gasto no se pudo actualizar'
         })
     }
 }
 
-userControllers.deleteUser = async (req, res) => {
-    const response = await Models.User.destroy({
+costControllers.deleteCost = async (req, res) => {
+    const response = await Models.Cost.destroy({
         where: {
             id: req.params.id
         }
@@ -98,14 +97,14 @@ userControllers.deleteUser = async (req, res) => {
     if (response) {
         return res.status(200).json({
             success: true,
-            message: 'Deleted user'
+            message: 'Costo/gasto eliminado'
         })
     } else {
         return res.status(404).json({
             success: false,
-            message: 'User no deleted'
+            message: 'Costo/gasto no se pudo eliminar'
         })
     }
 }
 
-export default userControllers
+export default costControllers
