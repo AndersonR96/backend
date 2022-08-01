@@ -2,7 +2,7 @@
 import Models from "../models/index.js"
 const userControllers = {}
 
-userControllers.getUser = async(req, res) => {
+userControllers.get = async(req, res) => {
     await Models.User.findAll()
     .then(response => {
         if (response.length === 0) {
@@ -21,7 +21,7 @@ userControllers.getUser = async(req, res) => {
     })
 }
 
-userControllers.getUserById = async (req, res) => {
+userControllers.getById = async (req, res) => {
     await Models.User.findByPk(req.params.id, {
         attributes:[
             'username',
@@ -45,7 +45,7 @@ userControllers.getUserById = async (req, res) => {
     })
 }
 
-userControllers.createUser = async (req, res) => {
+userControllers.create = async (req, res) => {
     const response = await Models.User.create(req.body)
     .catch(err => {
         res.status(400).json({
@@ -56,7 +56,7 @@ userControllers.createUser = async (req, res) => {
     res.status(200).json(response)
 }
 
-userControllers.updateUser = async (req, res) => {
+userControllers.update= async (req, res) => {
     const response = await Models.User.update(req.body, {
         where: {
             id: req.params.id
@@ -82,7 +82,7 @@ userControllers.updateUser = async (req, res) => {
     }
 }
 
-userControllers.deleteUser = async (req, res) => {
+userControllers.delete = async (req, res) => {
     const response = await Models.User.destroy({
         where: {
             id: req.params.id

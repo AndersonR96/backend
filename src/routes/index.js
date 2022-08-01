@@ -26,35 +26,39 @@ router.get('/', async function(req, res) {
 })
 
 //RUTAS MODELO CUSTOMER
-router.get('/customer', Controllers.customerControllers.getCustomer)
-router.get('/customer/:id', Controllers.customerControllers.getCustomerById)
-router.post('/customer', Controllers.customerControllers.createCustomer)
+router.get('/customer', Controllers.customerControllers.get)
+router.get('/customer/:id', Controllers.customerControllers.getById)
+router.post('/customer', Controllers.customerControllers.create)
+router.put('/customer', Controllers.customerControllers.update)
+router.delete('/customer', Controllers.customerControllers.delete)
 
 //RUTAS MODELO PROVIDER (PROVEEDOR)
-router.get('/provider', Controllers.providerControllers.getProvider)
-router.get('/provider/:id', Controllers.providerControllers.getProviderById)
-router.post('/provider', Controllers.providerControllers.createProvider)
+router.get('/provider', Controllers.providerControllers.get)
+router.get('/provider/:id', Controllers.providerControllers.getById)
+router.post('/provider', Controllers.providerControllers.create)
+router.put('/provider/:id', Controllers.providerControllers.update)
+router.delete('/provider/:id', Controllers.providerControllers.delete)
 
 //RUTAS MODELO USER
-router.get('/user', Controllers.userControllers.getUser)
-router.get('/user/:id', Controllers.userControllers.getUserById)
-router.post('/user', Controllers.userControllers.createUser)
-router.put('/user/:id', Controllers.userControllers.updateUser)
-router.delete('/user/:id', Controllers.userControllers.deleteUser)
+router.get('/user', Controllers.userControllers.get)
+router.get('/user/:id', Controllers.userControllers.getById)
+router.post('/user', Controllers.userControllers.create)
+router.put('/user/:id', Controllers.userControllers.update)
+router.delete('/user/:id', Controllers.userControllers.delete)
 
 //RUTAS MODELO COSTO/GASTO
-router.get('/cost', Controllers.costControllers.getCost)
-router.get('/cost/:id', Controllers.costControllers.getCostById)
-router.get('/cost', Controllers.costControllers.createCost)
-router.get('/cost', Controllers.costControllers.updateCost)
-router.get('/cost', Controllers.costControllers.deleteCost)
+router.get('/cost', Controllers.costControllers.get)
+router.get('/cost/:id', Controllers.costControllers.getById)
+router.post('/cost', Controllers.costControllers.create)
+router.put('/cost', Controllers.costControllers.update)
+router.delete('/cost', Controllers.costControllers.delete)
 
 //RUTAS MODELO SERVICIO
-router.get('/productService', Controllers.productServiceControllers.getProductService)
-router.get('/productService/:id', Controllers.productServiceControllers.getProductServiceById)
-router.get('/productService', Controllers.productServiceControllers.createProductService)
-router.get('/productService', Controllers.productServiceControllers.updateProductService)
-router.get('/productService', Controllers.productServiceControllers.deleteProductService)
+router.get('/productService', Controllers.productServiceControllers.get)
+router.get('/productService/:id', Controllers.productServiceControllers.getById)
+router.post('/productService', Controllers.productServiceControllers.create)
+router.put('/productService', Controllers.productServiceControllers.update)
+router.delete('/productService', Controllers.productServiceControllers.delete)
 
 
 

@@ -1,7 +1,7 @@
 import Models from "../models/index.js"
 const customerControllers = {}
 
-customerControllers.getCustomer = async(req, res) => {
+customerControllers.get = async(req, res) => {
      await Models.Customer.findAll()
     .then(response => {
         if (response.length === 0) {
@@ -20,7 +20,7 @@ customerControllers.getCustomer = async(req, res) => {
     })
 }
 
-customerControllers.getCustomerById = async (req, res) => {
+customerControllers.getById = async (req, res) => {
     await Models.Customer.findByPk(req.params.id, {
         attributes:[
             'name',
@@ -44,7 +44,7 @@ customerControllers.getCustomerById = async (req, res) => {
     })
 }
 
-customerControllers.createCustomer = async (req, res) => {
+customerControllers.create = async (req, res) => {
     const response = await Models.Customer.create(req.body)
     .catch(err => {
         res.status(400).json({
@@ -53,6 +53,58 @@ customerControllers.createCustomer = async (req, res) => {
         })
     })
     res.status(200).json(response)
+}
+
+customerControllers.update = async (req, res) => {
+    const response = await Models.Customer.update(req.body, {
+        where: {
+            id: req.params.id
+        }
+    })
+    .catch(err => {
+        res.status(400).json({
+            success: false,
+            error: err,
+        })
+    })
+
+    if (response != 0) {
+        return res.status(200).json({
+            success: true,
+            message: 'Updated customer'
+        })
+    } else {
+        return res.status(404).json({
+            success: true,
+            message: 'Customer no updated'
+        })
+    }
+}
+
+customerControllers.delete = async (req, res) => {
+    const response = await Models.Customer.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+    .catch(err => {
+        res.status(400).json({
+            success: false,
+            error: err
+        })
+    })
+
+    if (response) {
+        return res.status(200).json({
+            success: true,
+            message: 'Deleted customer'
+        })
+    } else {
+        return res.status(404).json({
+            success: false,
+            message: 'Customer no deleted'
+        })
+    }
 }
 
 export default customerControllers
