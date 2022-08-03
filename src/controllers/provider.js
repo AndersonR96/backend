@@ -1,8 +1,8 @@
 // import Provider from "../models/index.js"
 import Models from "../models/index.js"
-const providerControllers = {}
+const Provider = {}
 
-providerControllers.getProvider = async(req, res) => {
+Provider.getProvider = async(req, res) => {
      await Models.Provider.findAll()
     .then(response => {
         if (response.length === 0) {
@@ -21,7 +21,7 @@ providerControllers.getProvider = async(req, res) => {
     })
 }
 
-providerControllers.getProviderById = async (req, res) => {
+Provider.getProviderById = async (req, res) => {
     await Models.Provider.findByPk(req.params.id, {
         attributes:[
             'businnes_name',
@@ -46,7 +46,7 @@ providerControllers.getProviderById = async (req, res) => {
     })
 }
 
-providerControllers.createProvider = async (req, res) => {
+Provider.createProvider = async (req, res) => {
     const response = await Models.Provider.create(req.body)
     .catch(err => {
         res.status(400).json({
@@ -57,4 +57,4 @@ providerControllers.createProvider = async (req, res) => {
     res.status(200).json(response)
 }
 
-export default providerControllers
+export default Provider
