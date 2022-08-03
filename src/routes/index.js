@@ -49,5 +49,13 @@ router.post('/cost', Controllers.Cost.createCost)
 router.put('/cost', Controllers.Cost.updateCost)
 router.delete('/cost', Controllers.Cost.deleteCost)
 
+//RUTAS MODELO SERVICIO
+router.get('/productService', Controllers.productServiceControllers.getProductService)
+router.get('/productService/:id', Controllers.productServiceControllers.getProductServiceById)
+router.get('/productService', Controllers.productServiceControllers.createProductService)
+router.get('/productService', Controllers.productServiceControllers.updateProductService)
+router.get('/productService', Controllers.productServiceControllers.deleteProductService)
+
+
 
 export default router

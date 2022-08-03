@@ -7,6 +7,9 @@ import User from './user.js'
 import Product from './product.js'
 import Purchase from './purchase.js'
 import Cost from './cost.js'
+import ProductService from './service.js';
+
+import Associations from './associations/associations.js';
 
 const Models = {
     Customer,
@@ -15,33 +18,10 @@ const Models = {
     Product,
     Purchase,
     Cost,
+    ProductService,
+    Associations,
 }
 
-Models.PurchaseProducts = connection.define('PurchaseProducts', {
-    PurchaseId: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: Product,
-          key: 'id'
-        }
-      },
-    ProductId: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: Product,
-          key: 'id'
-        }
-      }
-})
-
-
-// RELACION MANY TO MANY CUSTOMER - PURCHASE
-Purchase.belongsToMany(Product, { through: Models.PurchaseProducts });
-Product.belongsToMany(Purchase, { through: Models.PurchaseProducts });
-
-// RELACION ONE TO MANY CUSTOMER - PURCHASE
-Customer.hasMany(Purchase)
-Purchase.belongsTo(Customer)
 
 
 export default Models
