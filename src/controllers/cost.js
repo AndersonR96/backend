@@ -2,7 +2,8 @@
 import Models from "../models/index.js"
 const Cost = {}
 
-Cost.getCost = async(req, res) => {
+
+costControllers.get = async(req, res) => {
     await Models.Cost.findAll()
     .then(response => {
         if (response.length === 0) {
@@ -21,7 +22,7 @@ Cost.getCost = async(req, res) => {
     })
 }
 
-Cost.getCostById = async (req, res) => {
+costControllers.getById = async (req, res) => {
     await Models.Cost.findByPk(req.params.id, {
         attributes:[
             'name',
@@ -44,7 +45,7 @@ Cost.getCostById = async (req, res) => {
     })
 }
 
-Cost.createCost = async (req, res) => {
+costControllers.create = async (req, res) => {
     const response = await Models.Cost.create(req.body)
     .catch(err => {
         res.status(400).json({
@@ -55,7 +56,7 @@ Cost.createCost = async (req, res) => {
     res.status(200).json(response)
 }
 
-Cost.updateCost = async (req, res) => {
+costControllers.update = async (req, res) => {
     const response = await Models.Cost.update(req.body, {
         where: {
             id: req.params.id
@@ -81,7 +82,7 @@ Cost.updateCost = async (req, res) => {
     }
 }
 
-Cost.deleteCost = async (req, res) => {
+costControllers.delete = async (req, res) => {
     const response = await Models.Cost.destroy({
         where: {
             id: req.params.id
