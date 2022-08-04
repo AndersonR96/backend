@@ -2,7 +2,7 @@
 import Models from "../models/index.js"
 const Provider = {}
 
-providerControllers.get = async(req, res) => {
+Provider.get = async(req, res) => {
      await Models.Provider.findAll()
     .then(response => {
         if (response.length === 0) {
@@ -21,7 +21,7 @@ providerControllers.get = async(req, res) => {
     })
 }
 
-providerControllers.getById = async (req, res) => {
+Provider.getById = async (req, res) => {
     await Models.Provider.findByPk(req.params.id, {
         attributes:[
             'businnes_name',
@@ -46,7 +46,7 @@ providerControllers.getById = async (req, res) => {
     })
 }
 
-providerControllers.create = async (req, res) => {
+Provider.create = async (req, res) => {
     const response = await Models.Provider.create(req.body)
     .catch(err => {
         res.status(400).json({
@@ -58,7 +58,7 @@ providerControllers.create = async (req, res) => {
 }
 
 
-providerControllers.update = async (req, res) => {
+Provider.update = async (req, res) => {
     const response = await Models.Provider.update(req.body, {
         where: {
             id: req.params.id
@@ -84,7 +84,7 @@ providerControllers.update = async (req, res) => {
     }
 }
 
-providerControllers.delete = async (req, res) => {
+Provider.delete = async (req, res) => {
     const response = await Models.Provider.destroy({
         where: {
             id: req.params.id
@@ -110,4 +110,4 @@ providerControllers.delete = async (req, res) => {
     }
 }
 
-export default providerControllers
+export default Provider

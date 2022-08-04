@@ -1,7 +1,7 @@
 import Models from "../models/index.js"
 const Customer = {}
 
-customerControllers.get = async(req, res) => {
+Customer.get = async(req, res) => {
      await Models.Customer.findAll()
     .then(response => {
         if (response.length === 0) {
@@ -20,7 +20,7 @@ customerControllers.get = async(req, res) => {
     })
 }
 
-customerControllers.getById = async (req, res) => {
+Customer.getById = async (req, res) => {
     await Models.Customer.findByPk(req.params.id, {
         attributes:[
             'name',
@@ -44,7 +44,7 @@ customerControllers.getById = async (req, res) => {
     })
 }
 
-customerControllers.create = async (req, res) => {
+Customer.create = async (req, res) => {
     const response = await Models.Customer.create(req.body)
     .catch(err => {
         res.status(400).json({
@@ -55,7 +55,7 @@ customerControllers.create = async (req, res) => {
     res.status(200).json(response)
 }
 
-customerControllers.update = async (req, res) => {
+Customer.update = async (req, res) => {
     const response = await Models.Customer.update(req.body, {
         where: {
             id: req.params.id
@@ -81,7 +81,7 @@ customerControllers.update = async (req, res) => {
     }
 }
 
-customerControllers.delete = async (req, res) => {
+Customer.delete = async (req, res) => {
     const response = await Models.Customer.destroy({
         where: {
             id: req.params.id
@@ -107,4 +107,4 @@ customerControllers.delete = async (req, res) => {
     }
 }
 
-export default customerControllers
+export default Customer
