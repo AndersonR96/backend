@@ -1,5 +1,5 @@
 import Models from "../models/index.js"
-const customerControllers = {}
+const Customer = {}
 
 customerControllers.get = async(req, res) => {
      await Models.Customer.findAll()

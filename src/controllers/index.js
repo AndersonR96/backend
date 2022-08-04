@@ -1,13 +1,11 @@
-import customerControllers from "./customer.js"
-import providerControllers from "./provider.js"
-import userControllers from "./user.js"
-import costControllers from "./cost.js"
-import productServiceControllers from "./service.js"
+import Customer from "./customer.js"
+import Provider from "./provider.js"
+import User from "./user.js"
+import Cost from "./cost.js"
 
 export const Controllers ={
-    customerControllers,
-    providerControllers,
-    userControllers,
-    costControllers,
-    productServiceControllers,
+    Customer,
+    Provider,
+    User,
+    Cost,
 }

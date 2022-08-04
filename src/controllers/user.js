@@ -1,6 +1,6 @@
 // import User from "../models/index.js"
 import Models from "../models/index.js"
-const userControllers = {}
+const User = {}
 
 userControllers.get = async(req, res) => {
     await Models.User.findAll()
@@ -108,4 +108,4 @@ userControllers.delete = async (req, res) => {
     }
 }
 
-export default userControllers
+export default User

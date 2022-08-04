@@ -1,6 +1,6 @@
 // import Provider from "../models/index.js"
 import Models from "../models/index.js"
-const providerControllers = {}
+const Provider = {}
 
 providerControllers.get = async(req, res) => {
      await Models.Provider.findAll()
@@ -56,6 +56,7 @@ providerControllers.create = async (req, res) => {
     })
     res.status(200).json(response)
 }
+
 
 providerControllers.update = async (req, res) => {
     const response = await Models.Provider.update(req.body, {
