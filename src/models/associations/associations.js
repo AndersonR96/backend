@@ -16,7 +16,7 @@ Associations.PurchaseProduct = connection.define('PurchaseProducts', {
     PurchaseId: {
         type: DataTypes.INTEGER,
         references: {
-          model: Product,
+          model: Purchase,
           key: 'id'
         }
       },
