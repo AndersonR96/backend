@@ -26,36 +26,38 @@ router.get('/', async function(req, res) {
 })
 
 //RUTAS MODELO CUSTOMER
-router.get('/customer', Controllers.Customer.getCustomer)
-router.get('/customer/:id', Controllers.Customer.getCustomerById)
-router.post('/customer', Controllers.Customer.createCustomer)
+router.get('/customer', Controllers.Customer.get)
+router.get('/customer/:id', Controllers.Customer.getById)
+router.post('/customer', Controllers.Customer.create)
+router.put('/customer', Controllers.Customer.update)
+router.delete('/customer', Controllers.Customer.delete)
 
-//RUTAS MODELO PROVIDER (PROVEEDOR)
-router.get('/provider', Controllers.Provider.getProvider)
-router.get('/provider/:id', Controllers.Provider.getProviderById)
-router.post('/provider', Controllers.Provider.createProvider)
+// //RUTAS MODELO PROVIDER (PROVEEDOR)
+router.get('/provider', Controllers.Provider.get)
+router.get('/provider/:id', Controllers.Provider.getById)
+router.post('/provider', Controllers.Provider.create)
+router.put('/provider/:id', Controllers.Provider.update)
+router.delete('/provider/:id', Controllers.Provider.delete)
 
-//RUTAS MODELO USER
-router.get('/user', Controllers.User.getUser)
-router.get('/user/:id', Controllers.User.getUserById)
-router.post('/user', Controllers.User.createUser)
-router.put('/user/:id', Controllers.User.updateUser)
-router.delete('/user/:id', Controllers.User.deleteUser)
+// //RUTAS MODELO USER
+router.get('/user', Controllers.User.get)
+router.get('/user/:id', Controllers.User.getById)
+router.post('/user', Controllers.User.create)
+router.put('/user/:id', Controllers.User.update)
+router.delete('/user/:id', Controllers.User.delete)
 
-//RUTAS MODELO COSTO/GASTO
-router.get('/cost', Controllers.Cost.getCost)
-router.get('/cost/:id', Controllers.Cost.getCostById)
-router.post('/cost', Controllers.Cost.createCost)
-router.put('/cost', Controllers.Cost.updateCost)
-router.delete('/cost', Controllers.Cost.deleteCost)
+// //RUTAS MODELO COSTO/GASTO
+router.get('/cost', Controllers.Cost.get)
+router.get('/cost/:id', Controllers.Cost.getById)
+router.post('/cost', Controllers.Cost.create)
+router.put('/cost', Controllers.Cost.update)
+router.delete('/cost', Controllers.Cost.delete)
 
-//RUTAS MODELO SERVICIO
-router.get('/productService', Controllers.productServiceControllers.getProductService)
-router.get('/productService/:id', Controllers.productServiceControllers.getProductServiceById)
-router.get('/productService', Controllers.productServiceControllers.createProductService)
-router.get('/productService', Controllers.productServiceControllers.updateProductService)
-router.get('/productService', Controllers.productServiceControllers.deleteProductService)
-
-
+// //RUTAS MODELO SERVICIO
+router.get('/productService', Controllers.productService.get)
+router.get('/productService/:id', Controllers.productService.getById)
+router.post('/productService', Controllers.productService.create)
+router.put('/productService', Controllers.productService.update)
+router.delete('/productService', Controllers.productService.delete)
 
 export default router

@@ -1,7 +1,7 @@
 import Models from "../models/index.js"
-const productServiceControllers = {}
+const productService = {}
 
-productServiceControllers.getProductService= async(req, res) => {
+productService.get= async(req, res) => {
     await Models.ProductService.findAll()
     .then(response => {
         if (response.length === 0) {
@@ -20,7 +20,7 @@ productServiceControllers.getProductService= async(req, res) => {
     })
 }
 
-productServiceControllers.getProductServiceById = async (req, res) => {
+productService.getById = async (req, res) => {
     await Models.ProductService.findByPk(req.params.id, {
         attributes:[
             'name',
@@ -43,7 +43,7 @@ productServiceControllers.getProductServiceById = async (req, res) => {
     })
 }
 
-productServiceControllers.createProductService = async (req, res) => {
+productService.create = async (req, res) => {
     const response = await Models.ProductService.create(req.body)
     .catch(err => {
         res.status(400).json({
@@ -54,7 +54,7 @@ productServiceControllers.createProductService = async (req, res) => {
     res.status(200).json(response)
 }
 
-productServiceControllers.updateProductService = async (req, res) => {
+productService.update = async (req, res) => {
     const response = await Models.ProductService.update(req.body, {
         where: {
             id: req.params.id
@@ -80,7 +80,7 @@ productServiceControllers.updateProductService = async (req, res) => {
     }
 }
 
-productServiceControllers.deleteProductService = async (req, res) => {
+productService.delete = async (req, res) => {
     const response = await Models.ProductService.destroy({
         where: {
             id: req.params.id
@@ -106,4 +106,4 @@ productServiceControllers.deleteProductService = async (req, res) => {
     }
 }
 
-export default productServiceControllers
+export default productService
