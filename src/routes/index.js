@@ -21,7 +21,6 @@ router.get('/', async function(req, res) {
         ENTORNO: process.env.ENTORNO,
         PUERTO: process.env.PORT ? process.env.PORT : 4000,
         DATABASE: status,
-        RUTAS: 'as'
     })
 })
 
