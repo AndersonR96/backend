@@ -8,12 +8,7 @@ app.use(json())
 app.use(urlencoded({extended: false}))
 
 app.use('/api', router)
-app.get('/routes', async function(req, res) {
-  return res.json(router.stack.map(element => {return element.route}))  
-})
-app.get('/models', async function(req, res) {
-  return res.send('Models view')  
-})
+
 
 const PORT = process.env.PORT || 4000
 
