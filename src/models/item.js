@@ -1,13 +1,17 @@
 import DataTypes from 'sequelize';
 import connection from '../../database/connection.js';
 
-const ProductService = connection.define('ProductService', {
+const Item = connection.define('Item', {
     name:{
         type: DataTypes.STRING,
         require: true,
     },
     description:{
         type: DataTypes.STRING,
+        require: true,
+    },
+    type:{
+        type:DataTypes.STRING,
         require: true,
     },
     amount:{
@@ -17,10 +21,14 @@ const ProductService = connection.define('ProductService', {
     cost:{
         type: DataTypes.STRING,
         require: true,
+    },
+    price:{
+        type: DataTypes.STRING,
+        require: true,
     }
 
 },{
     timestamps: true,
 })
 
-export default ProductService
+export default Item
