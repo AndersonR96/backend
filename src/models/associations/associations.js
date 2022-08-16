@@ -1,18 +1,18 @@
 import DataTypes  from 'sequelize';
+import Sequelize from 'sequelize';
 
 import connection from '../../../database/connection.js';
 import Customer from '../customer.js';
 import Provider from '../provider.js'
 import User from '../user.js'
-import Product from '../product.js'
 import Purchase from '../purchase.js'
 import Cost from '../cost.js'
-import ProductService from '../service.js';
+import Item from '../item.js';
 
 const Associations = {}
 
-///////////////PURCHASE - PRODUCT  ASSOCIATION ///////////////////////
-Associations.PurchaseProduct = connection.define('PurchaseProducts', {
+///////////////PURCHASE - ITEM  ASSOCIATION ///////////////////////
+Associations.PurchaseItem = connection.define('PurchaseItem', {
     PurchaseId: {
         type: DataTypes.INTEGER,
         references: {
@@ -20,10 +20,10 @@ Associations.PurchaseProduct = connection.define('PurchaseProducts', {
           key: 'id'
         }
       },
-    ProductId: {
+    ItemId: {
         type: DataTypes.INTEGER,
         references: {
-          model: Product,
+          model: Item,
           key: 'id'
         }
       }
@@ -35,7 +35,7 @@ Associations.ProviderCost = connection.define('ProviderCost', {
         type: DataTypes.INTEGER,
         references: {
           model: Provider,
-          key: 'dni'
+          key: 'id'
         }
       },
     CostId: {
@@ -47,66 +47,39 @@ Associations.ProviderCost = connection.define('ProviderCost', {
       }
 })
 
-///////////////PROVIDER - PRODUCTSERIVE ASSOCIATION ///////////////////////
-Associations.ProviderProductService = connection.define('ProviderProductService', {
+Associations.ProviderItem = connection.define('ProviderItem', {
   ProviderId: {
       type: DataTypes.INTEGER,
       references: {
         model: Provider,
-        key: 'dni'
+        key: 'id'
       }
     },
-  ProductServiceId: {
+  ItemId: {
       type: DataTypes.INTEGER,
       references: {
-        model: ProductService,
+        model: Item,
         key: 'id'
       }
     }
 })
 
-///////////////PRODUCTSERIVE - PURCHASE ASSOCIATION ///////////////////////
-Associations.ProductServicePurchase = connection.define('ProductServicePurchase', {
-  ProductServiceId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: ProductService,
-        key: 'id'
-      }
-    },
-  PurchaseId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: Purchase,
-        key: 'id'
-      }
-    }
-})
 
-// ASSOCIATIONS MANY TO MANY CUSTOMER - PURCHASE
-Purchase.belongsToMany(Product, { through: Associations.PurchaseProduct });
-Product.belongsToMany(Purchase, { through: Associations.PurchaseProduct });
-
-// ASSOCIATIONS ONE TO MANY CUSTOMER - PURCHASE
-Customer.hasMany(Purchase)
-Purchase.belongsTo(Customer)
+// ASSOCIATIONS MANY TO MANY PURCHASE - ITEM
+Purchase.belongsToMany(Item, { through: Associations.PurchaseItem });
+Item.belongsToMany(Purchase, { through: Associations.PurchaseItem });
 
 //ASSOCIATIONS MANY TO MANY PROVIDER-COST
 Provider.belongsToMany(Cost, {through:Associations.ProviderCost})
 Cost.belongsToMany(Provider,{through: Associations.ProviderCost})
 
-//ASSOCIATIONS MANY TO MANY PROVIDER-PRODUCTSERVICE
-Provider.belongsToMany(ProductService, {through: Associations.ProviderProductService})
-ProductService.belongsToMany(Provider, {through: Associations.ProviderProductService})
+//ASSOCIATIONS MANY TO MANY PROVIDER-ITEM
+Provider.belongsToMany(Item, {through: Associations.ProviderItem})
+Item.belongsToMany(Provider, {through: Associations.ProviderItem})
 
-//ASSOCIATIONS MANY TO MANY PRODUCTE SERVICE - PURCHASE
-ProductService.belongsToMany(Purchase, {through: Associations.ProductServicePurchase})
-Purchase.belongsToMany(ProductService, {through: Associations.ProductServicePurchase})
-
-///////////////CUSTOMER - PURCHASE ASSOCIATION ///////////////////////
-Customer.hasMany(Purchase,{
-  foreignKey:'customerId'
-})
+// ASSOCIATIONS ONE TO MANY CUSTOMER - PURCHASE
+Customer.hasMany(Purchase)
 Purchase.belongsTo(Customer)
+
 
 export default Associations

@@ -68,7 +68,7 @@ Customer.update = async (req, res) => {
         })
     })
 
-    if (response != 0) {
+    if (response !=0) {
         return res.status(200).json({
             success: true,
             message: 'Updated customer'
