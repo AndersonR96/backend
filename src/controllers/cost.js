@@ -46,13 +46,33 @@ Cost.getById = async (req, res) => {
 }
 
 Cost.create = async (req, res) => {
-    const response = await Models.Cost.create(req.body)
+
+    let data = req.body
+
+    /////Calculo (IVA)
+    const impuesto = await Models.auxiliaryTables.Taxes.findOne({where:{ id: data.IVA_FEE}})
+    data.IVA_Amount = impuesto.FEE * data.price
+
+   /////Calculo otro impuesto 1
+    const impuesto1 = await Models.auxiliaryTables.Taxes.findOne({where:{ id: data.tax1_FEE}})
+    data.tax1_Amount = impuesto1.FEE * data.price
+
+    /////Calculo otro impuesto 2
+    const impuesto2 = await Models.auxiliaryTables.Taxes.findOne({where:{ id: data.tax2_FEE}})
+    data.tax2_Amount= impuesto2.FEE * data.price
+
+    const response = await Models.Cost.create(data)
     .catch(err => {
         res.status(400).json({
             success: false,
             error: err,
         })
     })
+
+    // const iva_fee = await Models.auxiliaryTables.Taxes.findAll()
+    // const cost_to_fee = await Models.Cost.findByPk(req.body.id)
+    // const iva_assignation = await cost_to_fee.addIva(iva_fee)
+
     res.status(200).json(response)
 }
 

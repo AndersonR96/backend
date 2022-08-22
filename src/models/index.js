@@ -8,6 +8,8 @@ import Item from './item.js';
 import Purchase from './purchase.js'
 import Cost from './cost.js'
 
+import auxiliaryTables from './auxiliaryTables/index.js';
+
 
 import Associations from './associations/associations.js';
 
@@ -19,6 +21,7 @@ const Models = {
     Purchase,
     Cost,
     Associations,
+    auxiliaryTables,
 }
 
 

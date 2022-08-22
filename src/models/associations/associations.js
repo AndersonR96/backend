@@ -8,6 +8,7 @@ import User from '../user.js'
 import Purchase from '../purchase.js'
 import Cost from '../cost.js'
 import Item from '../item.js';
+import auxiliaryTables from '../AuxiliaryTables/index.js';
 
 const Associations = {}
 
@@ -47,6 +48,7 @@ Associations.ProviderCost = connection.define('ProviderCost', {
       }
 })
 
+//////////////PROVIDER - ITEM ASSOCIATION////////////////////////
 Associations.ProviderItem = connection.define('ProviderItem', {
   ProviderId: {
       type: DataTypes.INTEGER,
@@ -80,6 +82,27 @@ Item.belongsToMany(Provider, {through: Associations.ProviderItem})
 // ASSOCIATIONS ONE TO MANY CUSTOMER - PURCHASE
 Customer.hasMany(Purchase)
 Purchase.belongsTo(Customer)
+
+// ASSOCIATIONS ONE TO MANY TAXES - COST
+const CostTaxes =  connection.define('CostTaxes',{
+  CostId:{
+    type: DataTypes.INTEGER,
+    references: {
+      model: Cost,
+      key:'id'
+    }
+  },
+  TaxesId:{
+    type:DataTypes.INTEGER,
+    references:{
+      model: auxiliaryTables.Taxes,
+      key:'id'
+    }
+  }
+})
+
+Cost.belongsToMany(auxiliaryTables.Taxes, {through:CostTaxes})
+auxiliaryTables.Taxes.belongsToMany(Cost,{through: CostTaxes})
 
 
 export default Associations

@@ -38,7 +38,7 @@ const Provider = connection.define('Provider', {
         type: DataTypes.STRING,
         require: true,
     },
-    estate:{
+    state:{
         type: DataTypes.STRING,
         require: true,
     },
